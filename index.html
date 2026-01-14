@@ -178,63 +178,6 @@ button,.btn{
   font-weight:600;
 }
 
-/* ===== CUENTA REGRESIVA (NUEVO) ===== */
-.countWrap{
-  margin:10px auto 14px;
-  max-width:720px;
-  text-align:center;
-}
-.countTitle{
-  font-family:"Cormorant Garamond",serif;
-  font-style:italic;
-  font-size:22px;
-  color:#3b332d;
-  margin-bottom:10px;
-}
-.countGrid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-@media(max-width:560px){
-  .countGrid{grid-template-columns:repeat(2,1fr)}
-}
-.countBox{
-  background:rgba(255,255,255,.55);
-  border:1px solid rgba(0,0,0,.10);
-  border-radius:16px;
-  padding:12px 10px;
-}
-.countNum{
-  font-family:"Playfair Display",serif;
-  color:var(--gold);
-  font-size:30px;
-  line-height:1;
-}
-.countLab{
-  margin-top:6px;
-  font-size:12px;
-  color:#4a423b;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-}
-.btnCalendar{
-  margin-top:12px;
-  width:100%;
-  max-width:420px;
-  padding:13px 16px;
-  border-radius:16px;
-  border:1px solid rgba(201,162,74,.95);
-  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
-  text-decoration:none;
-  color:#2a241f;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  font-weight:600;
-}
-
 /* ===== FORM ===== */
 label{font-size:13px}
 input,select,textarea{
@@ -252,6 +195,30 @@ textarea{min-height:90px}
   gap:12px;
 }
 @media(max-width:800px){ .formGrid{grid-template-columns:1fr} }
+
+/* ===== TEL ROJO (NUEVO) ===== */
+.inputBad{
+  border-color: rgba(216,75,75,.95) !important;
+  box-shadow: 0 0 0 3px rgba(216,75,75,.15) !important;
+}
+
+/* ===== BOTÓN GOOGLE CALENDAR (mismo estilo) ===== */
+.btnCalendar{
+  margin-top:12px;
+  width:100%;
+  max-width:420px;
+  padding:13px 16px;
+  border-radius:16px;
+  border:1px solid rgba(201,162,74,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
+  text-decoration:none;
+  color:#2a241f;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight:600;
+}
 
 /* ===== FIX RESPONSIVO MOVIL ===== */
 @media(max-width:640px){
@@ -318,33 +285,6 @@ footer{
 <div class="card">
   <h2>Información</h2>
 
-  <!-- CUENTA REGRESIVA + CALENDARIO (NUEVO) -->
-  <div class="countWrap" aria-label="Cuenta regresiva">
-    <div class="countTitle" id="countTitle">Faltan…</div>
-    <div class="countGrid">
-      <div class="countBox">
-        <div class="countNum" id="cdDays">0</div>
-        <div class="countLab">Días</div>
-      </div>
-      <div class="countBox">
-        <div class="countNum" id="cdHours">00</div>
-        <div class="countLab">Horas</div>
-      </div>
-      <div class="countBox">
-        <div class="countNum" id="cdMins">00</div>
-        <div class="countLab">Min</div>
-      </div>
-      <div class="countBox">
-        <div class="countNum" id="cdSecs">00</div>
-        <div class="countLab">Seg</div>
-      </div>
-    </div>
-
-    <a class="btnCalendar" id="btnCalendar" target="_blank" rel="noopener">
-      📅 Agregar a Google Calendar
-    </a>
-  </div>
-
   <div class="grid2">
     <div class="pill">👗 <b>Código de vestimenta:</b> Formal</div>
     <div class="pill">🖤 <b>Temática:</b> Cruella De Vil</div>
@@ -370,7 +310,7 @@ footer{
 <div class="card">
   <h2>Confirmación</h2>
 
-  <form id="rsvpForm">
+  <form id="rsvpForm" novalidate>
     <div class="formGrid">
       <div>
         <label>Nombre *</label>
@@ -389,8 +329,15 @@ footer{
         <input id="acompanantes" type="number" value="0" min="0">
       </div>
       <div>
-        <label>Teléfono *</label>
-        <input id="telefono" inputmode="numeric">
+        <label>Teléfono (10 dígitos) *</label>
+        <input
+          id="telefono"
+          required
+          inputmode="numeric"
+          autocomplete="tel"
+          maxlength="10"
+          placeholder="Ej. 9991234567"
+        >
       </div>
     </div>
 
@@ -400,10 +347,21 @@ footer{
     </div>
 
     <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
-      <button type="submit">ENVIAR</button>
+      <button type="submit" id="btnSend">ENVIAR</button>
       <div id="respuesta" class="small"></div>
     </div>
   </form>
+
+  <!-- BOTÓN CALENDARIO (REUBICADO) -->
+  <div id="calendarWrap" style="display:none;text-align:center;margin-top:10px">
+    <a class="btnCalendar" id="btnCalendar" target="_blank" rel="noopener">
+      📅 Agregar a Google Calendar
+    </a>
+    <div class="small" style="margin-top:6px">
+      (Solo si confirmas que asistirás)
+    </div>
+  </div>
+
 </div>
 
 <!-- ANUNCIO FINAL -->
@@ -425,7 +383,7 @@ footer{
 <audio id="voice" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/audio-accesible.wav" preload="metadata"></audio>
 
 <script>
-/* ===== CONFIG EVENTO (solo cambia aquí cuando el cliente cambie fecha/hora) ===== */
+/* ===== CONFIG EVENTO (solo cambia aquí) ===== */
 const EVENT_LOCAL = { y: 2026, mo: 5, d: 20, h: 19, mi: 0 }; // 20 junio 2026 7:00 PM
 const EVENT_TITLE = "XV Años · Valentina Montoya Rivera";
 const EVENT_LOCATION = "La Casa de Piedra, Cholul, Mérida";
@@ -436,7 +394,7 @@ const YT="https://youtube.com/shorts/6ZZpWReNyY8";
 const WA_FOTO="529991327488";
 const WA_VENTA="529991832064";
 
-/* ===== REFERENCIAS SEGURAS (esto evita que se rompa en móvil) ===== */
+/* ===== REFERENCIAS SEGURAS ===== */
 const elBtnVideo = document.getElementById("btnVideo");
 const elBtnMusic = document.getElementById("btnMusic");
 const elBtnVoice = document.getElementById("btnVoice");
@@ -445,17 +403,12 @@ const elBtnFoto  = document.getElementById("btnFotoRedes");
 const elWaVenta  = document.getElementById("waVenta");
 const elMusic    = document.getElementById("music");
 const elVoice    = document.getElementById("voice");
-const elCalendar = document.getElementById("btnCalendar");
 
-const cdDays  = document.getElementById("cdDays");
-const cdHours = document.getElementById("cdHours");
-const cdMins  = document.getElementById("cdMins");
-const cdSecs  = document.getElementById("cdSecs");
-const countTitle = document.getElementById("countTitle");
+const calendarWrap = document.getElementById("calendarWrap");
+const elCalendar = document.getElementById("btnCalendar");
 
 /* ===== LINKS ===== */
 elMapsLink.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT_LOCATION);
-
 elBtnVideo.addEventListener("click", ()=> window.open(YT, "_blank", "noopener"));
 
 elBtnFoto.href =
@@ -466,7 +419,7 @@ elWaVenta.href =
   "https://wa.me/" + WA_VENTA +
   "?text=" + encodeURIComponent("Hola, me interesa una invitación web cinematográfica.");
 
-/* ===== AUDIO (funcionando como antes) ===== */
+/* ===== AUDIO ===== */
 let musicOn = false;
 let savedVol = 0.9;
 
@@ -507,40 +460,9 @@ elVoice.addEventListener("ended", ()=>{
   elBtnVoice.textContent = "🔊 Invitación hablada";
 });
 
-/* ===== CUENTA REGRESIVA ===== */
+/* ===== GOOGLE CALENDAR (link listo, pero se muestra solo si = Sí) ===== */
 const eventDate = new Date(EVENT_LOCAL.y, EVENT_LOCAL.mo, EVENT_LOCAL.d, EVENT_LOCAL.h, EVENT_LOCAL.mi, 0);
-function pad2(n){ return String(n).padStart(2,"0"); }
-
-function tickCountdown(){
-  const now = new Date();
-  let diff = eventDate - now;
-
-  if(diff <= 0){
-    cdDays.textContent = "0";
-    cdHours.textContent = "00";
-    cdMins.textContent = "00";
-    cdSecs.textContent = "00";
-    countTitle.textContent = "¡Hoy es el gran día!";
-    return;
-  }
-
-  const totalSeconds = Math.floor(diff/1000);
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const mins = Math.floor((totalSeconds % 3600) / 60);
-  const secs = totalSeconds % 60;
-
-  cdDays.textContent = days;
-  cdHours.textContent = pad2(hours);
-  cdMins.textContent = pad2(mins);
-  cdSecs.textContent = pad2(secs);
-}
-tickCountdown();
-setInterval(tickCountdown, 1000);
-
-/* ===== BOTÓN GOOGLE CALENDAR ===== */
 function toUTCStringForGCal(dt){
-  // YYYYMMDDTHHMMSSZ
   const y = dt.getUTCFullYear();
   const mo = String(dt.getUTCMonth()+1).padStart(2,"0");
   const d = String(dt.getUTCDate()).padStart(2,"0");
@@ -549,20 +471,41 @@ function toUTCStringForGCal(dt){
   const s = String(dt.getUTCSeconds()).padStart(2,"0");
   return `${y}${mo}${d}T${h}${mi}${s}Z`;
 }
-const endDate = new Date(eventDate.getTime() + (4*60*60*1000)); // +4 horas
+const endDate = new Date(eventDate.getTime() + (4*60*60*1000));
 
-const gcalUrl =
+elCalendar.href =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
   "&text=" + encodeURIComponent(EVENT_TITLE) +
   "&details=" + encodeURIComponent("Invitación web cinematática (DEMO).") +
   "&location=" + encodeURIComponent(EVENT_LOCATION) +
   "&dates=" + encodeURIComponent(toUTCStringForGCal(eventDate) + "/" + toUTCStringForGCal(endDate));
 
-elCalendar.href = gcalUrl;
+/* ===== VALIDACIÓN TELÉFONO (ROJO SI NO SON 10) ===== */
+const telInput = document.getElementById("telefono");
+function cleanTel(v){ return (v||"").replace(/\D/g,'').slice(0,10); }
+function updateTelStyle(){
+  const tel = cleanTel(telInput.value);
+  telInput.value = tel;
+  if(tel.length === 0){
+    telInput.classList.remove("inputBad");
+    return;
+  }
+  if(tel.length !== 10) telInput.classList.add("inputBad");
+  else telInput.classList.remove("inputBad");
+}
+telInput.addEventListener("input", updateTelStyle);
 
-/* ===== RSVP -> SHEETS (igual que lo tenías, pero seguro) ===== */
+/* ===== Mostrar calendario SOLO si eligen "Sí" ===== */
+const asistenciaSel = document.getElementById("asistencia");
+asistenciaSel.addEventListener("change", ()=>{
+  calendarWrap.style.display = (asistenciaSel.value === "Sí") ? "block" : "none";
+});
+
+/* ===== RSVP -> SHEETS + VALIDACIÓN 10 DÍGITOS ===== */
 const form = document.getElementById("rsvpForm");
 const respuesta = document.getElementById("respuesta");
+const btnSend = document.getElementById("btnSend");
+
 const nombre = document.getElementById("nombre");
 const asistencia = document.getElementById("asistencia");
 const acompanantes = document.getElementById("acompanantes");
@@ -571,13 +514,38 @@ const mensaje = document.getElementById("mensaje");
 
 form.addEventListener("submit", async (e)=>{
   e.preventDefault();
+  respuesta.textContent = "";
+
+  const tel = cleanTel(telefono.value);
+
+  if(tel.length !== 10){
+    telefono.classList.add("inputBad");
+    respuesta.textContent = "⚠️ El teléfono debe tener exactamente 10 dígitos.";
+    telefono.focus();
+    return;
+  }
+
+  if(!nombre.value.trim()){
+    respuesta.textContent = "⚠️ Escribe tu nombre.";
+    nombre.focus();
+    return;
+  }
+
+  if(!asistencia.value){
+    respuesta.textContent = "⚠️ Selecciona si asistirás.";
+    asistencia.focus();
+    return;
+  }
+
+  btnSend.disabled = true;
+  btnSend.style.opacity = ".6";
 
   const payload = {
     timestamp: new Date().toISOString(),
     nombre_invitado: (nombre.value || "").trim(),
     asistencia: asistencia.value,
     numero_acompanantes: acompanantes.value,
-    telefono: (telefono.value || "").replace(/\D/g,''),
+    telefono: tel,
     mensaje: (mensaje.value || "").trim(),
     origen: "XV_DEMO",
     tema: "CRUELLA_DE_VIL",
@@ -593,8 +561,13 @@ form.addEventListener("submit", async (e)=>{
     respuesta.textContent = "¡Gracias por confirmar!";
     form.reset();
     acompanantes.value = 0;
+    telefono.classList.remove("inputBad");
+    calendarWrap.style.display = "none";
   }catch{
     respuesta.textContent = "Error al enviar. Intenta de nuevo.";
+  }finally{
+    btnSend.disabled = false;
+    btnSend.style.opacity = "1";
   }
 });
 </script>
