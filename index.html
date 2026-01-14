@@ -156,7 +156,29 @@ button,.btn{
   background:rgba(255,255,255,.55);
 }
 
-/* ===== CUENTA REGRESIVA ===== */
+/* ===== BOTÓN FOTO ===== */
+.btnFoto{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid rgba(201,162,74,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
+  text-decoration:none;
+  color:#2a241f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:10px;
+  white-space:normal;
+  word-break:break-word;
+  line-height:1.25;
+  font-weight:600;
+}
+
+/* ===== CUENTA REGRESIVA (NUEVO) ===== */
 .countWrap{
   margin:10px auto 14px;
   max-width:720px;
@@ -196,7 +218,6 @@ button,.btn{
   letter-spacing:.04em;
   text-transform:uppercase;
 }
-
 .btnCalendar{
   margin-top:12px;
   width:100%;
@@ -211,28 +232,6 @@ button,.btn{
   align-items:center;
   justify-content:center;
   gap:10px;
-  font-weight:600;
-}
-
-/* ===== BOTÓN FOTO ===== */
-.btnFoto{
-  width:100%;
-  max-width:520px;
-  margin:0 auto;
-  padding:14px 16px;
-  border-radius:16px;
-  border:1px solid rgba(201,162,74,.95);
-  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
-  text-decoration:none;
-  color:#2a241f;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  gap:10px;
-  white-space:normal;
-  word-break:break-word;
-  line-height:1.25;
   font-weight:600;
 }
 
@@ -289,9 +288,9 @@ footer{
   <div class="inviteWrap">
 
     <div class="btnrow">
-      <button id="btnVideo">▶ Ver video</button>
-      <button id="btnMusic" onclick="toggleMusic()">🎵 Música: ON</button>
-      <button id="btnVoice" onclick="toggleVoice()">🔊 Invitación hablada</button>
+      <button id="btnVideo" type="button">▶ Ver video</button>
+      <button id="btnMusic" type="button">🎵 Música: ON</button>
+      <button id="btnVoice" type="button">🔊 Invitación hablada</button>
     </div>
 
     <img src="https://raw.githubusercontent.com/dajecapo-rgb/DEMO15/refs/heads/main/FOTO%20DEMO.png" alt="Invitación XV">
@@ -308,35 +307,35 @@ footer{
       <div class="overlayBox">
         <div class="invTextMain">La Casa de Piedra</div>
         <div class="invTextSub">Cholul, Mérida</div>
-        <a class="mapLink" id="mapsLink" target="_blank">📍 Abrir ubicación en Maps</a>
+        <a class="mapLink" id="mapsLink" target="_blank" rel="noopener">📍 Abrir ubicación en Maps</a>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- INFO + CUENTA REGRESIVA -->
+<!-- INFO -->
 <div class="card">
   <h2>Información</h2>
 
-  <!-- Cuenta regresiva -->
+  <!-- CUENTA REGRESIVA + CALENDARIO (NUEVO) -->
   <div class="countWrap" aria-label="Cuenta regresiva">
-    <div class="countTitle">Faltan…</div>
+    <div class="countTitle" id="countTitle">Faltan…</div>
     <div class="countGrid">
       <div class="countBox">
         <div class="countNum" id="cdDays">0</div>
         <div class="countLab">Días</div>
       </div>
       <div class="countBox">
-        <div class="countNum" id="cdHours">0</div>
+        <div class="countNum" id="cdHours">00</div>
         <div class="countLab">Horas</div>
       </div>
       <div class="countBox">
-        <div class="countNum" id="cdMins">0</div>
+        <div class="countNum" id="cdMins">00</div>
         <div class="countLab">Min</div>
       </div>
       <div class="countBox">
-        <div class="countNum" id="cdSecs">0</div>
+        <div class="countNum" id="cdSecs">00</div>
         <div class="countLab">Seg</div>
       </div>
     </div>
@@ -344,9 +343,6 @@ footer{
     <a class="btnCalendar" id="btnCalendar" target="_blank" rel="noopener">
       📅 Agregar a Google Calendar
     </a>
-    <div class="small" style="margin-top:8px">
-      (Se agrega con la fecha y hora del evento automáticamente)
-    </div>
   </div>
 
   <div class="grid2">
@@ -363,7 +359,7 @@ footer{
   </div>
 
   <div style="margin-top:14px;text-align:center">
-    <a class="btnFoto" id="btnFotoRedes" target="_blank">📸 ¡Quiero mi foto para subir a redes!</a>
+    <a class="btnFoto" id="btnFotoRedes" target="_blank" rel="noopener">📸 ¡Quiero mi foto para subir a redes!</a>
     <div class="small" style="margin-top:8px">
       La familia te enviará una foto contigo y la quinceañera.
     </div>
@@ -414,7 +410,7 @@ footer{
 <div class="card">
   <div class="small">¿Te gustó esta experiencia? Podemos diseñarla para tu evento.</div>
   <div style="margin-top:10px;text-align:center">
-    <a class="btn" id="waVenta" target="_blank">✨ ¡Pide tu invitación aquí!</a>
+    <a class="btn" id="waVenta" target="_blank" rel="noopener">✨ ¡Pide tu invitación aquí!</a>
   </div>
 </div>
 
@@ -424,45 +420,95 @@ footer{
 
 </div>
 
-<audio id="music" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/1Quince%20Primaveras.mp3"></audio>
-<audio id="voice" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/audio-accesible.wav"></audio>
+<!-- Audios -->
+<audio id="music" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/1Quince%20Primaveras.mp3" preload="metadata"></audio>
+<audio id="voice" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/audio-accesible.wav" preload="metadata"></audio>
 
 <script>
-/* ===== CONFIG EVENTO (1 SOLO LUGAR PARA CAMBIAR) =====
-   Ajusta aquí la fecha/hora local del evento:
-   Formato: año, mes-1, día, hora(24h), minuto
-*/
+/* ===== CONFIG EVENTO (solo cambia aquí cuando el cliente cambie fecha/hora) ===== */
 const EVENT_LOCAL = { y: 2026, mo: 5, d: 20, h: 19, mi: 0 }; // 20 junio 2026 7:00 PM
+const EVENT_TITLE = "XV Años · Valentina Montoya Rivera";
+const EVENT_LOCATION = "La Casa de Piedra, Cholul, Mérida";
 
+/* ===== CONFIG EXISTENTE ===== */
 const ENDPOINT="https://script.google.com/macros/s/AKfycbxxsg6OEj93oVU77iakNMlCNAnFlfgURKsqvReO7eek-PE6xGbBpGEHOewx2q-BXf2_hQ/exec";
 const YT="https://youtube.com/shorts/6ZZpWReNyY8";
 const WA_FOTO="529991327488";
 const WA_VENTA="529991832064";
-const LUGAR="La Casa de Piedra Cholul Mérida";
+
+/* ===== REFERENCIAS SEGURAS (esto evita que se rompa en móvil) ===== */
+const elBtnVideo = document.getElementById("btnVideo");
+const elBtnMusic = document.getElementById("btnMusic");
+const elBtnVoice = document.getElementById("btnVoice");
+const elMapsLink = document.getElementById("mapsLink");
+const elBtnFoto  = document.getElementById("btnFotoRedes");
+const elWaVenta  = document.getElementById("waVenta");
+const elMusic    = document.getElementById("music");
+const elVoice    = document.getElementById("voice");
+const elCalendar = document.getElementById("btnCalendar");
+
+const cdDays  = document.getElementById("cdDays");
+const cdHours = document.getElementById("cdHours");
+const cdMins  = document.getElementById("cdMins");
+const cdSecs  = document.getElementById("cdSecs");
+const countTitle = document.getElementById("countTitle");
 
 /* ===== LINKS ===== */
-mapsLink.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(LUGAR);
-btnVideo.onclick=()=>window.open(YT,"_blank");
+elMapsLink.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT_LOCATION);
 
-btnFotoRedes.href="https://wa.me/"+WA_FOTO+"?text="+encodeURIComponent("Hola, quiero mi foto para subir a redes. Soy invitado(a) de la XV y me gustaría que me envíen mi foto con la quinceañera, por favor.");
-waVenta.href="https://wa.me/"+WA_VENTA+"?text="+encodeURIComponent("Hola, me interesa una invitación web cinematográfica.");
+elBtnVideo.addEventListener("click", ()=> window.open(YT, "_blank", "noopener"));
 
-/* ===== AUDIO ===== */
-let musicOn=false;
-function toggleMusic(){
-  musicOn=!musicOn;
-  if(musicOn){ music.play().catch(()=>{}); }
-  else{ music.pause(); }
-  btnMusic.textContent="🎵 Música: "+(musicOn?"OFF":"ON");
+elBtnFoto.href =
+  "https://wa.me/" + WA_FOTO +
+  "?text=" + encodeURIComponent("Hola, quiero mi foto para subir a redes. Soy invitado(a) de la XV y me gustaría que me envíen mi foto con la quinceañera, por favor.");
+
+elWaVenta.href =
+  "https://wa.me/" + WA_VENTA +
+  "?text=" + encodeURIComponent("Hola, me interesa una invitación web cinematográfica.");
+
+/* ===== AUDIO (funcionando como antes) ===== */
+let musicOn = false;
+let savedVol = 0.9;
+
+function updateMusicLabel(){
+  elBtnMusic.textContent = "🎵 Música: " + (musicOn ? "OFF" : "ON");
 }
-function toggleVoice(){
-  if(voice.paused){ voice.play().catch(()=>{}); }
-  else{ voice.pause(); }
-}
+updateMusicLabel();
 
-/* ===== CUENTA REGRESIVA (sincronizada con EVENT_LOCAL) ===== */
+elBtnMusic.addEventListener("click", ()=>{
+  if(!musicOn){
+    elMusic.volume = savedVol;
+    elMusic.play().catch(()=>{});
+    musicOn = true;
+  }else{
+    elMusic.pause();
+    musicOn = false;
+  }
+  updateMusicLabel();
+});
+
+elBtnVoice.addEventListener("click", ()=>{
+  if(elVoice.paused){
+    if(musicOn){
+      savedVol = elMusic.volume;
+      elMusic.volume = 0.18;
+    }
+    elVoice.play().catch(()=>{});
+    elBtnVoice.textContent = "⏹ Detener invitación hablada";
+  }else{
+    elVoice.pause();
+    if(musicOn) elMusic.volume = savedVol;
+    elBtnVoice.textContent = "🔊 Invitación hablada";
+  }
+});
+
+elVoice.addEventListener("ended", ()=>{
+  if(musicOn) elMusic.volume = savedVol;
+  elBtnVoice.textContent = "🔊 Invitación hablada";
+});
+
+/* ===== CUENTA REGRESIVA ===== */
 const eventDate = new Date(EVENT_LOCAL.y, EVENT_LOCAL.mo, EVENT_LOCAL.d, EVENT_LOCAL.h, EVENT_LOCAL.mi, 0);
-
 function pad2(n){ return String(n).padStart(2,"0"); }
 
 function tickCountdown(){
@@ -471,10 +517,10 @@ function tickCountdown(){
 
   if(diff <= 0){
     cdDays.textContent = "0";
-    cdHours.textContent = "0";
-    cdMins.textContent = "0";
-    cdSecs.textContent = "0";
-    document.querySelector(".countTitle").textContent = "¡Hoy es el gran día!";
+    cdHours.textContent = "00";
+    cdMins.textContent = "00";
+    cdSecs.textContent = "00";
+    countTitle.textContent = "¡Hoy es el gran día!";
     return;
   }
 
@@ -492,11 +538,9 @@ function tickCountdown(){
 tickCountdown();
 setInterval(tickCountdown, 1000);
 
-/* ===== BOTÓN GOOGLE CALENDAR =====
-   Genera link con fecha/hora del EVENT_LOCAL.
-*/
-function toICSDateUTC(dt){
-  // convierte a UTC en formato YYYYMMDDTHHMMSSZ
+/* ===== BOTÓN GOOGLE CALENDAR ===== */
+function toUTCStringForGCal(dt){
+  // YYYYMMDDTHHMMSSZ
   const y = dt.getUTCFullYear();
   const mo = String(dt.getUTCMonth()+1).padStart(2,"0");
   const d = String(dt.getUTCDate()).padStart(2,"0");
@@ -505,44 +549,52 @@ function toICSDateUTC(dt){
   const s = String(dt.getUTCSeconds()).padStart(2,"0");
   return `${y}${mo}${d}T${h}${mi}${s}Z`;
 }
-
-// duración estimada 4 horas
-const endDate = new Date(eventDate.getTime() + (4*60*60*1000));
-
-const title = "XV Años · Valentina Montoya Rivera";
-const details = "Invitación web cinematática (DEMO).";
-const location = "La Casa de Piedra, Cholul, Mérida";
+const endDate = new Date(eventDate.getTime() + (4*60*60*1000)); // +4 horas
 
 const gcalUrl =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent(title) +
-  "&details=" + encodeURIComponent(details) +
-  "&location=" + encodeURIComponent(location) +
-  "&dates=" + encodeURIComponent(toICSDateUTC(eventDate) + "/" + toICSDateUTC(endDate));
+  "&text=" + encodeURIComponent(EVENT_TITLE) +
+  "&details=" + encodeURIComponent("Invitación web cinematática (DEMO).") +
+  "&location=" + encodeURIComponent(EVENT_LOCATION) +
+  "&dates=" + encodeURIComponent(toUTCStringForGCal(eventDate) + "/" + toUTCStringForGCal(endDate));
 
-btnCalendar.href = gcalUrl;
+elCalendar.href = gcalUrl;
 
-/* ===== RSVP -> SHEETS ===== */
-rsvpForm.addEventListener("submit",async e=>{
+/* ===== RSVP -> SHEETS (igual que lo tenías, pero seguro) ===== */
+const form = document.getElementById("rsvpForm");
+const respuesta = document.getElementById("respuesta");
+const nombre = document.getElementById("nombre");
+const asistencia = document.getElementById("asistencia");
+const acompanantes = document.getElementById("acompanantes");
+const telefono = document.getElementById("telefono");
+const mensaje = document.getElementById("mensaje");
+
+form.addEventListener("submit", async (e)=>{
   e.preventDefault();
-  const payload={
-    timestamp:new Date().toISOString(),
-    nombre_invitado:(nombre.value||"").trim(),
-    asistencia:asistencia.value,
-    numero_acompanantes:acompanantes.value,
-    telefono:(telefono.value||"").replace(/\D/g,''),
-    mensaje:(mensaje.value||"").trim(),
-    origen:"XV_DEMO_V3",
-    tema:"CRUELLA_DE_VIL",
-    origen_envio:"WEB_INVITACION",
-    evento_iso_local: eventDate.toString()
+
+  const payload = {
+    timestamp: new Date().toISOString(),
+    nombre_invitado: (nombre.value || "").trim(),
+    asistencia: asistencia.value,
+    numero_acompanantes: acompanantes.value,
+    telefono: (telefono.value || "").replace(/\D/g,''),
+    mensaje: (mensaje.value || "").trim(),
+    origen: "XV_DEMO",
+    tema: "CRUELLA_DE_VIL",
+    origen_envio: "WEB_INVITACION"
   };
+
   try{
-    await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-    respuesta.textContent="¡Gracias por confirmar!";
-    rsvpForm.reset();acompanantes.value=0;
+    await fetch(ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload)
+    });
+    respuesta.textContent = "¡Gracias por confirmar!";
+    form.reset();
+    acompanantes.value = 0;
   }catch{
-    respuesta.textContent="Error al enviar. Intenta de nuevo.";
+    respuesta.textContent = "Error al enviar. Intenta de nuevo.";
   }
 });
 </script>
