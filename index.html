@@ -45,13 +45,14 @@ body{
 h2{
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
-  font-size:24px;
+  font-size:26px;
   text-align:center;
   margin:0 0 10px;
 }
 
-.small{font-size:13px;color:#4a423b}
+.small{font-size:13px;color:#4a423b;line-height:1.35}
 
+/* ===== BOTONES TOP ===== */
 .btnrow{
   display:flex;
   gap:10px;
@@ -61,15 +62,23 @@ h2{
 }
 
 button,.btn{
-  flex:1;
   padding:11px;
   border-radius:14px;
   border:1px solid rgba(201,162,74,.9);
   background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.35));
   font-family:Inter,sans-serif;
   cursor:pointer;
+  text-decoration:none;
+  color:#2a241f;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
 }
 
+.btnrow button{flex:1}
+
+/* ===== INVITACIÓN ===== */
 .inviteWrap{
   position:relative;
   border-radius:18px;
@@ -84,6 +93,7 @@ button,.btn{
   pointer-events:none;
 }
 
+/* CAJAS LATERALES */
 .infoLeft,.infoRight{
   position:absolute;
   width:300px;
@@ -93,7 +103,6 @@ button,.btn{
   font-family:"Playfair Display",serif;
   color:var(--gold);
 }
-
 .infoLeft{left:18px}
 .infoRight{right:18px}
 
@@ -110,11 +119,13 @@ button,.btn{
   border:1px solid rgba(0,0,0,.10);
 }
 
-.invTextMain{font-size:20px}
+.invTextMain{font-size:20px;line-height:1.15}
 .invTextSub{
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
   margin-top:6px;
+  color:#3b332d;
+  font-size:18px;
 }
 
 .mapLink{
@@ -125,16 +136,18 @@ button,.btn{
   text-decoration:none;
   color:#4a423b;
   font-size:13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 
+/* ===== INFO ===== */
 .grid2{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
-@media(max-width:800px){
-  .grid2{grid-template-columns:1fr}
-}
+@media(max-width:800px){ .grid2{grid-template-columns:1fr} }
 
 .pill{
   padding:12px 14px;
@@ -143,6 +156,87 @@ button,.btn{
   background:rgba(255,255,255,.55);
 }
 
+/* ===== CUENTA REGRESIVA ===== */
+.countWrap{
+  margin:10px auto 14px;
+  max-width:720px;
+  text-align:center;
+}
+.countTitle{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:22px;
+  color:#3b332d;
+  margin-bottom:10px;
+}
+.countGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+@media(max-width:560px){
+  .countGrid{grid-template-columns:repeat(2,1fr)}
+}
+.countBox{
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:16px;
+  padding:12px 10px;
+}
+.countNum{
+  font-family:"Playfair Display",serif;
+  color:var(--gold);
+  font-size:30px;
+  line-height:1;
+}
+.countLab{
+  margin-top:6px;
+  font-size:12px;
+  color:#4a423b;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.btnCalendar{
+  margin-top:12px;
+  width:100%;
+  max-width:420px;
+  padding:13px 16px;
+  border-radius:16px;
+  border:1px solid rgba(201,162,74,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
+  text-decoration:none;
+  color:#2a241f;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  font-weight:600;
+}
+
+/* ===== BOTÓN FOTO ===== */
+.btnFoto{
+  width:100%;
+  max-width:520px;
+  margin:0 auto;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid rgba(201,162,74,.95);
+  background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(255,255,255,.45));
+  text-decoration:none;
+  color:#2a241f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:10px;
+  white-space:normal;
+  word-break:break-word;
+  line-height:1.25;
+  font-weight:600;
+}
+
+/* ===== FORM ===== */
 label{font-size:13px}
 input,select,textarea{
   width:100%;
@@ -158,18 +252,16 @@ textarea{min-height:90px}
   grid-template-columns:1fr 1fr;
   gap:12px;
 }
-@media(max-width:800px){
-  .formGrid{grid-template-columns:1fr}
-}
+@media(max-width:800px){ .formGrid{grid-template-columns:1fr} }
 
 /* ===== FIX RESPONSIVO MOVIL ===== */
 @media(max-width:640px){
-
   .btnrow{
     position:static;
     margin:10px 6px 12px;
     flex-direction:column;
   }
+  .btnrow button{width:100%}
 
   .infoLeft,.infoRight{
     position:static;
@@ -177,11 +269,7 @@ textarea{min-height:90px}
     width:auto;
     margin:12px 8px 0;
   }
-
-  .mapLink{
-    width:100%;
-    text-align:center;
-  }
+  .mapLink{width:100%}
 }
 
 footer{
@@ -227,9 +315,39 @@ footer{
   </div>
 </div>
 
-<!-- INFO -->
+<!-- INFO + CUENTA REGRESIVA -->
 <div class="card">
   <h2>Información</h2>
+
+  <!-- Cuenta regresiva -->
+  <div class="countWrap" aria-label="Cuenta regresiva">
+    <div class="countTitle">Faltan…</div>
+    <div class="countGrid">
+      <div class="countBox">
+        <div class="countNum" id="cdDays">0</div>
+        <div class="countLab">Días</div>
+      </div>
+      <div class="countBox">
+        <div class="countNum" id="cdHours">0</div>
+        <div class="countLab">Horas</div>
+      </div>
+      <div class="countBox">
+        <div class="countNum" id="cdMins">0</div>
+        <div class="countLab">Min</div>
+      </div>
+      <div class="countBox">
+        <div class="countNum" id="cdSecs">0</div>
+        <div class="countLab">Seg</div>
+      </div>
+    </div>
+
+    <a class="btnCalendar" id="btnCalendar" target="_blank" rel="noopener">
+      📅 Agregar a Google Calendar
+    </a>
+    <div class="small" style="margin-top:8px">
+      (Se agrega con la fecha y hora del evento automáticamente)
+    </div>
+  </div>
 
   <div class="grid2">
     <div class="pill">👗 <b>Código de vestimenta:</b> Formal</div>
@@ -245,9 +363,9 @@ footer{
   </div>
 
   <div style="margin-top:14px;text-align:center">
-    <a class="btn" id="btnFotoRedes" target="_blank">📸 ¡Quiero mi foto para subir a redes!</a>
-    <div class="small" style="margin-top:6px">
-      La familia te enviará una foto contigo y la quinceañera
+    <a class="btnFoto" id="btnFotoRedes" target="_blank">📸 ¡Quiero mi foto para subir a redes!</a>
+    <div class="small" style="margin-top:8px">
+      La familia te enviará una foto contigo y la quinceañera.
     </div>
   </div>
 </div>
@@ -285,11 +403,19 @@ footer{
       <textarea id="mensaje"></textarea>
     </div>
 
-    <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
+    <div style="margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       <button type="submit">ENVIAR</button>
       <div id="respuesta" class="small"></div>
     </div>
   </form>
+</div>
+
+<!-- ANUNCIO FINAL -->
+<div class="card">
+  <div class="small">¿Te gustó esta experiencia? Podemos diseñarla para tu evento.</div>
+  <div style="margin-top:10px;text-align:center">
+    <a class="btn" id="waVenta" target="_blank">✨ ¡Pide tu invitación aquí!</a>
+  </div>
 </div>
 
 <footer>
@@ -302,38 +428,122 @@ footer{
 <audio id="voice" src="https://github.com/dajecapo-rgb/DEMO15/raw/refs/heads/main/audio-accesible.wav"></audio>
 
 <script>
+/* ===== CONFIG EVENTO (1 SOLO LUGAR PARA CAMBIAR) =====
+   Ajusta aquí la fecha/hora local del evento:
+   Formato: año, mes-1, día, hora(24h), minuto
+*/
+const EVENT_LOCAL = { y: 2026, mo: 5, d: 20, h: 19, mi: 0 }; // 20 junio 2026 7:00 PM
+
 const ENDPOINT="https://script.google.com/macros/s/AKfycbxxsg6OEj93oVU77iakNMlCNAnFlfgURKsqvReO7eek-PE6xGbBpGEHOewx2q-BXf2_hQ/exec";
 const YT="https://youtube.com/shorts/6ZZpWReNyY8";
 const WA_FOTO="529991327488";
+const WA_VENTA="529991832064";
+const LUGAR="La Casa de Piedra Cholul Mérida";
 
-mapsLink.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent("La Casa de Piedra Cholul Mérida");
+/* ===== LINKS ===== */
+mapsLink.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(LUGAR);
 btnVideo.onclick=()=>window.open(YT,"_blank");
 
-btnFotoRedes.href="https://wa.me/"+WA_FOTO+"?text="+encodeURIComponent("Hola, quiero mi foto para subir a redes.");
+btnFotoRedes.href="https://wa.me/"+WA_FOTO+"?text="+encodeURIComponent("Hola, quiero mi foto para subir a redes. Soy invitado(a) de la XV y me gustaría que me envíen mi foto con la quinceañera, por favor.");
+waVenta.href="https://wa.me/"+WA_VENTA+"?text="+encodeURIComponent("Hola, me interesa una invitación web cinematográfica.");
 
+/* ===== AUDIO ===== */
 let musicOn=false;
 function toggleMusic(){
   musicOn=!musicOn;
-  musicOn?music.play():music.pause();
+  if(musicOn){ music.play().catch(()=>{}); }
+  else{ music.pause(); }
   btnMusic.textContent="🎵 Música: "+(musicOn?"OFF":"ON");
 }
 function toggleVoice(){
-  voice.paused?voice.play():voice.pause();
+  if(voice.paused){ voice.play().catch(()=>{}); }
+  else{ voice.pause(); }
 }
 
+/* ===== CUENTA REGRESIVA (sincronizada con EVENT_LOCAL) ===== */
+const eventDate = new Date(EVENT_LOCAL.y, EVENT_LOCAL.mo, EVENT_LOCAL.d, EVENT_LOCAL.h, EVENT_LOCAL.mi, 0);
+
+function pad2(n){ return String(n).padStart(2,"0"); }
+
+function tickCountdown(){
+  const now = new Date();
+  let diff = eventDate - now;
+
+  if(diff <= 0){
+    cdDays.textContent = "0";
+    cdHours.textContent = "0";
+    cdMins.textContent = "0";
+    cdSecs.textContent = "0";
+    document.querySelector(".countTitle").textContent = "¡Hoy es el gran día!";
+    return;
+  }
+
+  const totalSeconds = Math.floor(diff/1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const mins = Math.floor((totalSeconds % 3600) / 60);
+  const secs = totalSeconds % 60;
+
+  cdDays.textContent = days;
+  cdHours.textContent = pad2(hours);
+  cdMins.textContent = pad2(mins);
+  cdSecs.textContent = pad2(secs);
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+/* ===== BOTÓN GOOGLE CALENDAR =====
+   Genera link con fecha/hora del EVENT_LOCAL.
+*/
+function toICSDateUTC(dt){
+  // convierte a UTC en formato YYYYMMDDTHHMMSSZ
+  const y = dt.getUTCFullYear();
+  const mo = String(dt.getUTCMonth()+1).padStart(2,"0");
+  const d = String(dt.getUTCDate()).padStart(2,"0");
+  const h = String(dt.getUTCHours()).padStart(2,"0");
+  const mi = String(dt.getUTCMinutes()).padStart(2,"0");
+  const s = String(dt.getUTCSeconds()).padStart(2,"0");
+  return `${y}${mo}${d}T${h}${mi}${s}Z`;
+}
+
+// duración estimada 4 horas
+const endDate = new Date(eventDate.getTime() + (4*60*60*1000));
+
+const title = "XV Años · Valentina Montoya Rivera";
+const details = "Invitación web cinematática (DEMO).";
+const location = "La Casa de Piedra, Cholul, Mérida";
+
+const gcalUrl =
+  "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+  "&text=" + encodeURIComponent(title) +
+  "&details=" + encodeURIComponent(details) +
+  "&location=" + encodeURIComponent(location) +
+  "&dates=" + encodeURIComponent(toICSDateUTC(eventDate) + "/" + toICSDateUTC(endDate));
+
+btnCalendar.href = gcalUrl;
+
+/* ===== RSVP -> SHEETS ===== */
 rsvpForm.addEventListener("submit",async e=>{
   e.preventDefault();
   const payload={
-    nombre:nombre.value,
+    timestamp:new Date().toISOString(),
+    nombre_invitado:(nombre.value||"").trim(),
     asistencia:asistencia.value,
-    acompanantes:acompanantes.value,
-    telefono:telefono.value,
-    mensaje:mensaje.value,
-    origen:"XV_DEMO"
+    numero_acompanantes:acompanantes.value,
+    telefono:(telefono.value||"").replace(/\D/g,''),
+    mensaje:(mensaje.value||"").trim(),
+    origen:"XV_DEMO_V3",
+    tema:"CRUELLA_DE_VIL",
+    origen_envio:"WEB_INVITACION",
+    evento_iso_local: eventDate.toString()
   };
-  await fetch(ENDPOINT,{method:"POST",body:JSON.stringify(payload)});
-  respuesta.textContent="¡Gracias por confirmar!";
-  rsvpForm.reset();acompanantes.value=0;
+  try{
+    await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    respuesta.textContent="¡Gracias por confirmar!";
+    rsvpForm.reset();acompanantes.value=0;
+  }catch{
+    respuesta.textContent="Error al enviar. Intenta de nuevo.";
+  }
 });
 </script>
 
