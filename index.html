@@ -15,10 +15,8 @@
   --no:#d84b4b;
   --paper:url("https://raw.githubusercontent.com/dajecapo-rgb/DEMO15/refs/heads/main/textura_blanca.png");
 }
-
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-
 body{
   font-family:Inter,system-ui,Arial,sans-serif;
   color:var(--text);
@@ -27,9 +25,7 @@ body{
     var(--paper);
   background-size:auto,cover;
 }
-
 .container{max-width:980px;margin:auto;padding:14px}
-
 .card{
   background:
     linear-gradient(180deg,rgba(255,255,255,.80),rgba(255,255,255,.72)),
@@ -41,7 +37,6 @@ body{
   border:1px solid rgba(0,0,0,.10);
   position:relative;
 }
-
 h2{
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
@@ -49,7 +44,6 @@ h2{
   text-align:center;
   margin:0 0 10px;
 }
-
 .small{font-size:13px;color:#4a423b;line-height:1.35}
 
 /* ===== BOTONES TOP ===== */
@@ -115,7 +109,6 @@ button,.btn{
   justify-content:center;
   border:1px solid rgba(0,0,0,.10);
 }
-
 .invTextMain{font-size:20px;line-height:1.15}
 .invTextSub{
   font-family:"Cormorant Garamond",serif;
@@ -124,8 +117,6 @@ button,.btn{
   color:#3b332d;
   font-size:18px;
 }
-
-/* BOTÓN MAPS (regresa aquí) */
 .mapLink{
   margin-top:10px;
   width:100%;
@@ -147,7 +138,6 @@ button,.btn{
 /* ===== INFO ===== */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:800px){ .grid2{grid-template-columns:1fr} }
-
 .pill{
   padding:12px 14px;
   border-radius:16px;
@@ -245,7 +235,20 @@ textarea{min-height:90px}
   font-weight:600;
 }
 
-/* ===== CIERRE: TEXTO DENTRO DEL ADORNO (sin maps aquí) ===== */
+/* ===== QR POST-CONFIRMACIÓN (solo aparece después de enviar) ===== */
+.qrBox{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(255,255,255,.60);
+  text-align:center;
+}
+.qrBox img{width:220px;max-width:80vw;border-radius:14px;border:1px solid rgba(0,0,0,.12)}
+.qrToken{margin-top:8px;font-size:12px;color:#4a423b}
+
+/* ===== CIERRE ===== */
 .finalCard{ padding:14px; }
 .finalOrn{
   position:relative;
@@ -263,10 +266,7 @@ textarea{min-height:90px}
   justify-content:center;
   padding:18px;
 }
-.finalContent{
-  width:min(720px, 92%);
-  text-align:center;
-}
+.finalContent{ width:min(720px, 92%); text-align:center; }
 .finalText{
   font-family:"Cormorant Garamond",serif;
   font-style:italic;
@@ -285,7 +285,6 @@ textarea{min-height:90px}
   .btnrow button{width:100%}
   .infoLeft,.infoRight{position:static;transform:none;width:auto;margin:12px 8px 0}
 }
-
 footer{text-align:center;font-size:12px;color:#555;margin:18px 0}
 </style>
 </head>
@@ -398,6 +397,15 @@ footer{text-align:center;font-size:12px;color:#555;margin:18px 0}
     </div>
   </form>
 
+  <!-- QR SOLO DESPUÉS DE CONFIRMAR -->
+  <div id="qrBox" class="qrBox">
+    <div class="small" style="margin-bottom:10px">
+      ✅ Este es tu <b>código de acceso</b>. Se te abrirá WhatsApp para enviártelo.
+    </div>
+    <img id="qrImg" alt="QR de acceso">
+    <div id="qrToken" class="qrToken"></div>
+  </div>
+
   <div style="text-align:center;margin-top:6px">
     <a class="btnCalendar" id="btnCalendar" target="_blank" rel="noopener">📅 Agregar a Google Calendar</a>
     <div class="small" style="margin-top:6px">(Tip: después de confirmar, agrégalo para que no se te pase)</div>
@@ -412,7 +420,7 @@ footer{text-align:center;font-size:12px;color:#555;margin:18px 0}
   </div>
 </div>
 
-<!-- CIERRE (adorno + texto dentro) -->
+<!-- CIERRE -->
 <div class="card finalCard">
   <div class="finalOrn" aria-label="Cierre con adorno">
     <img src="https://raw.githubusercontent.com/dajecapo-rgb/DEMO15/refs/heads/main/adornofinal.png" alt="Adorno final">
@@ -428,7 +436,6 @@ footer{text-align:center;font-size:12px;color:#555;margin:18px 0}
 </div>
 
 <footer>© 2026 Valentina Montoya Rivera · DEMO</footer>
-
 </div>
 
 <!-- Audios -->
@@ -441,8 +448,10 @@ const EVENT_LOCAL = { y: 2026, mo: 5, d: 20, h: 19, mi: 0 }; // 20 junio 2026 7:
 const EVENT_TITLE = "XV Años · Valentina Montoya Rivera";
 const EVENT_LOCATION = "La Casa de Piedra, Cholul, Mérida";
 
-/* ===== CONFIG EXISTENTE ===== */
-const ENDPOINT="https://script.google.com/macros/s/AKfycbxxsg6OEj93oVU77iakNMlCNAnFlfgURKsqvReO7eek-PE6xGbBpGEHOewx2q-BXf2_hQ/exec";
+/* ===== CONFIG ENDPOINT (YA PEGADO) ===== */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbz3dDj647w_w_fUopCfYCKcTuO1x7Iy2XfU81J5P6yJK2V9lvxTwCgRHn1jWGmucMIsWw/exec";
+
+/* ===== DEMO ===== */
 const YT="https://youtube.com/shorts/6ZZpWReNyY8";
 const WA_FOTO="529991327488";
 const WA_VENTA="529991832064";
@@ -463,6 +472,10 @@ const cdHours = document.getElementById("cdHours");
 const cdMins  = document.getElementById("cdMins");
 const cdSecs  = document.getElementById("cdSecs");
 const countTitle = document.getElementById("countTitle");
+
+const qrBox = document.getElementById("qrBox");
+const qrImg = document.getElementById("qrImg");
+const qrTokenEl = document.getElementById("qrToken");
 
 /* ===== LINKS ===== */
 elBtnVideo.addEventListener("click", ()=> window.open(YT, "_blank", "noopener"));
@@ -584,7 +597,7 @@ function updateTelStyle(){
 }
 telInput.addEventListener("input", updateTelStyle);
 
-/* ===== RSVP -> SHEETS ===== */
+/* ===== RSVP -> SHEETS + QR ===== */
 const form = document.getElementById("rsvpForm");
 const respuesta = document.getElementById("respuesta");
 const btnSend = document.getElementById("btnSend");
@@ -598,6 +611,7 @@ const mensaje = document.getElementById("mensaje");
 form.addEventListener("submit", async (e)=>{
   e.preventDefault();
   respuesta.textContent = "";
+  qrBox.style.display = "none";
 
   const tel = cleanTel(telefono.value);
 
@@ -628,23 +642,50 @@ form.addEventListener("submit", async (e)=>{
     numero_acompanantes: acompanantes.value,
     telefono: tel,
     mensaje: (mensaje.value || "").trim(),
-    origen: "XV_DEMO",
-    tema: "CRUELLA_DE_VIL",
-    origen_envio: "WEB_INVITACION"
+    origen: "DEMO_CINEMATICA",
+    tema: "CRUELLA_GLAM_OSCURO",
+    origen_envio: "WEB_DEMO"
   };
 
   try{
-    await fetch(ENDPOINT,{
+    const res = await fetch(ENDPOINT,{
       method:"POST",
       headers:{"Content-Type":"text/plain;charset=utf-8"},
       body: JSON.stringify(payload)
     });
+
+    const data = await res.json().catch(()=> ({}));
+
+    if(!data.ok){
+      throw new Error(data.error || "Respuesta no válida del servidor");
+    }
+
+    // Mostrar QR en pantalla (post-confirmación)
+    if(data.qr_url){
+      qrImg.src = data.qr_url;
+      qrTokenEl.textContent = "Token: " + (data.qr_token || "");
+      qrBox.style.display = "block";
+
+      // Abrir WhatsApp para enviar el código al número capturado
+      // Nota: envío 100% automático requiere WhatsApp Business API.
+      const txt =
+        "Código para control de asistencia. Favor de presentarlo el día del evento.\n\n" +
+        "Nombre: " + payload.nombre_invitado + "\n" +
+        "Token: " + (data.qr_token || "") + "\n" +
+        "QR: " + data.qr_url;
+
+      window.open("https://wa.me/52" + tel + "?text=" + encodeURIComponent(txt), "_blank", "noopener");
+    }
+
     respuesta.textContent = "¡Gracias por confirmar!";
+
     form.reset();
     acompanantes.value = 0;
     telefono.classList.remove("inputBad");
-  }catch{
-    respuesta.textContent = "Error al enviar. Intenta de nuevo.";
+
+  }catch(err){
+    respuesta.textContent = "Error al enviar o generar QR. Intenta de nuevo.";
+    console.error(err);
   }finally{
     btnSend.disabled = false;
     btnSend.style.opacity = "1";
